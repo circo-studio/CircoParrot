@@ -1,0 +1,53 @@
+<!-- HEADER -->
+<header id="header">
+    <div id="logo-group">
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo" style="margin-top:5px;">
+            <a href="/">
+                <img src="~/img/TApps_logo.png" alt="TAPPS">
+            </a>
+        </span>
+        <!-- END LOGO PLACEHOLDER -->
+
+    </div>
+
+
+
+
+    <!-- pulled right: nav area -->
+    <div class="pull-right">
+        <!-- collapse menu button -->
+        <div id="hide-menu" class="btn-header pull-right">
+            <span>
+                <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu">
+                    <i class="fa fa-reorder"></i>
+                </a>
+            </span>
+        </div>
+        <!-- end collapse menu -->
+        <!-- #MOBILE -->
+        <!-- Top menu profile link : this shows only when top menu is active -->
+        <!-- fullscreen button -->
+        <div id="fullscreen" class="btn-header transparent pull-right">
+
+            <span>
+                <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen">
+                    <i class="fa fa-arrows-alt"></i>
+                </a>
+            </span>
+        </div>
+        <!-- end fullscreen button -->
+
+        <!-- user name -->
+        <div class="btn-header pull-right" style="margin-top:16px;">
+            <span style="color:white;">
+                Welcome @this.User.Identity.Name.Split('\\')[1].TrimEnd(';')
+                !
+            </span>
+        </div>
+        <!-- user name -->
+
+    </div>
+    <!-- end pulled right: nav area -->
+</header>
+<!-- END HEADER -->

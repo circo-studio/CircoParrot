@@ -1,0 +1,44 @@
+@using SmartAdmin.Seed.Configuration
+@using SmartAdmin.Seed.Extensions
+@inject IOptions<SmartSettings> Settings
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+    <!-- User info -->
+    <div class="login-info">
+        <span>
+            @this.User.Identity.Name;
+        </span>
+    </div>
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive-->
+    <nav>
+        <!--
+        NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            <li is-active-route asp-controller="Home">
+                <a href="#" title="Schedules">
+                    <i class="fa fa-lg fa-fw fa-home"></i> 
+                    <span class="menu-item-parent">
+                        AWS
+                    </span>
+                </a>
+                <ul>
+                    <li is-active-route asp-controller="Home" asp-action="Index">
+                        <a asp-controller="FeedIptvs" asp-action="Index" title="IPTV">
+                            S3 Storage
+                        </a>
+                    </li>
+                </ul>
+            </li>            
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+</aside>
+<!-- END NAVIGATION -->

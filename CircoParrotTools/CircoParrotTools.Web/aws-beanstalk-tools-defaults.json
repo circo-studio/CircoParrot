@@ -1,0 +1,18 @@
+
+{
+    "comment" : "This file is used to help set default values when using the dotnet CLI extension Amazon.ElasticBeanstalk.Tools. For more information run \"dotnet eb --help\" from the project root.",
+    "profile" : "Circo AWS",
+    "region"  : "us-east-1",
+    "application" : "FeedIPTVWeb",
+    "environment" : "FeedIPTVWeb-dev",
+    "cname"       : "FeedIPTVweb-dev",
+    "solution-stack" : "64bit Windows Server 2016 v1.2.0 running IIS 10.0",
+    "environment-type" : "SingleInstance",
+    "service-role"     : "aws-elasticbeanstalk-service-role",
+    "health-check-url" : "/",
+    "instance-type"    : "t1.micro",
+    "key-pair"         : "VMTurnerAleph",
+    "iis-website"      : "Default Web Site",
+    "app-path"         : "/",
+    "enable-xray"      : false
+}

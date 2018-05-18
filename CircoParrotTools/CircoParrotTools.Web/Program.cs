@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+#region Using
+
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
-namespace CircoParrotTools.Web
+#endregion
+
+namespace SmartAdmin.Seed
 {
-    public class Program
+    internal class Program
     {
-        public static void Main(string[] args)
-        {
-            BuildWebHost(args).Run();
-        }
+        internal static void Main(string[] args) => BuildWebHost(args).Run();
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+        private static IWebHost BuildWebHost(string[] args) => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
     }
 }

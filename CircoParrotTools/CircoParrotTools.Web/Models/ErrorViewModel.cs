@@ -1,6 +1,4 @@
-using System;
-
-namespace CircoParrotTools.Web.Models
+namespace SmartAdmin.Seed.Models
 {
     public class ErrorViewModel
     {
