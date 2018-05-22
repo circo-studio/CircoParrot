@@ -1,0 +1,251 @@
+﻿@model IEnumerable<CircoParrotTools.Web.Models.FilesUploadViewModel>
+    
+
+
+    @{
+    ViewData["Title"] = "FilesUploadView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER --><i class="fa-fw glyphicon glyphicon-time"></i> AWS <span>
+                    >
+                    Files to upload
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <!-- MODAL PLACE HOLDER -->
+            <div id="modal-container" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content"></div>
+                </div>
+            </div>
+            <!-- END MODAL -->
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+                     data-widget-editbutton="false"
+                     data-widget-colorbutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-togglebutton="false"
+                     data-widget-fullscreenbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header></header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <table id="feedTimezones" class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Filename
+                                            </th>
+                                            <th>
+                                                Size
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.FileName
+                                            </td>
+                                            <td>
+                                                @item.FileSize
+                                            </td>
+                                            <td>
+                                                <a asp-action="UploadToS3" asp-route-id="" class="btn btn-success btn-xs">Upload</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+    @section Scripts {
+        <script type="text/javascript">
+            /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+         *
+         * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+         *
+         * // activate tooltips
+         * $("[rel=tooltip]").tooltip();
+         *
+         * // activate popovers
+         * $("[rel=popover]").popover();
+         *
+         * // activate popovers with hover states
+         * $("[rel=popover-hover]").popover({ trigger: "hover" });
+         *
+         * // activate inline charts
+         * runAllCharts();
+         *
+         * // setup widgets
+         * setup_widgets_desktop();
+         *
+         * // run form elements
+         * runAllForms();
+         *
+         ********************************
+         *
+         * pageSetUp() is needed whenever you load a page.
+         * It initializes and checks for all basic elements of the page
+         * and makes rendering easier.
+         *
+         */
+
+            pageSetUp();
+
+            /*
+             * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+             * eg alert("my home function");
+             *
+             * var pagefunction = function() {
+             *   ...
+             * }
+             * loadScript("/js/plugin/_PLUGIN_NAME_.js", pagefunction);
+             *
+             * TO LOAD A SCRIPT:
+             * var pagefunction = function (){
+             *  loadScript(".../plugin.js", run_after_loaded);
+             * }
+             *
+             * OR
+             *
+             * loadScript(".../plugin.js", run_after_loaded);
+             */
+
+            // PAGE RELATED SCRIPTS
+
+            // pagefunction
+
+            var pagefunction = function () {
+                // $('#feedTimezones').DataTable();
+
+
+                var responsiveHelper_feedTimezones = undefined;
+
+                var breakpointDefinition = {
+                    tablet: 1024,
+                    phone: 480
+                };
+
+                $('#feedTimezones').dataTable({
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_feedTimezones) {
+                            responsiveHelper_feedTimezones =
+                                new ResponsiveDatatablesHelper($('#feedTimezones'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_feedTimezones.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_feedTimezones.respond();
+                    }
+                });
+
+
+            };
+
+            // end pagefunction
+
+            // run pagefunction on load
+
+            // load related plugins
+
+
+            loadScript("/js/plugin/datatables/jquery.dataTables.min.js",
+                function () {
+                    loadScript("/js/plugin/datatables/dataTables.colVis.min.js",
+                        function () {
+                            loadScript("/js/plugin/datatables/dataTables.tableTools.min.js",
+                                function () {
+                                    loadScript("/js/plugin/datatables/dataTables.bootstrap.min.js",
+                                        function () {
+                                            loadScript("/js/plugin/datatable-responsive/datatables.responsive.min.js",
+                                                pagefunction);
+                                        });
+                                });
+                        });
+                });
+
+            $(function () {
+                // boostrap 4 load modal example from docs
+                $('#modal-container').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget); // Button that triggered the modal
+                    var url = button.attr("href");
+                    var modal = $(this);
+
+                    // note that this will replace the content of modal-content ever time the modal is opened
+                    modal.find('.modal-content').load(url);
+                });
+            });
+
+
+
+        </script>
+    }
