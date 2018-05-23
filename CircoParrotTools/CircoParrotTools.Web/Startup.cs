@@ -1,5 +1,6 @@
 #region Using
 
+using CircoParrotTools.Data.Models.DB;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -57,7 +58,7 @@ namespace SmartAdmin.Seed
             //services.AddTransient<ApplicationDbSeeder>();
 
             //// Enable the use of SQL Server utilizing DI
-            //services.AddEntityFrameworkSqlServer();
+            services.AddEntityFrameworkSqlServer();
 
             //// Add the default identity classes and schema for use with EntityFramework
             //services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
@@ -65,7 +66,7 @@ namespace SmartAdmin.Seed
             //// Enable the Context pool to manage the connections in an optimized manner
             //services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(settings.ConnectionString));
 
-            //services.AddDbContext<tappsContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<CircoParrotContext>(options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 
             //// Add application services.
             //services.AddTransient<IEmailSender, EmailSender>();

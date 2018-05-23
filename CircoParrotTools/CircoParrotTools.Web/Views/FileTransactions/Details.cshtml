@@ -1,0 +1,31 @@
+﻿@model CircoParrotTools.Data.Models.DB.FileTransactions
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FileTransactions</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LineNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LineNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PurchaseOrderId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
