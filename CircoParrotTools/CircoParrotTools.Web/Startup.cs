@@ -78,11 +78,11 @@ namespace SmartAdmin.Seed
 
 
             // Autenticacion y Autorizacion
-            services
-                .AddAuthentication(IISDefaults.AuthenticationScheme).AddCookie();
+            //services
+            //    .AddAuthentication(IISDefaults.AuthenticationScheme).AddCookie();     //////////////////////////////////////////////////////////////////////////
 
             //services.AddTransient<IClaimsTransformation, TAPPSUserClaimsTransformation>();
-            
+
             //services.AddAuthorization(options =>
             //{
             //    options.AddPolicy("AdminsOnly", policy => policy.RequireClaim(ClaimsType.IsAdmin, "true"));
