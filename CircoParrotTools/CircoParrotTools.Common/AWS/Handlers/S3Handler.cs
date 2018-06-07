@@ -1,29 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Amazon;
-using Amazon.S3;
+﻿using Amazon.S3;
 using Amazon.S3.Model;
+using CircoParrotTools.Common.AWS.Handlers;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace ControladorS3
+namespace CircoParrotTools.Common.AWS.Handlers
 {
-
-
-
-    public static class S3Handler
+    public class S3Handler : IS3Handler
     {
+        public S3Handler()
+        {
+        }
 
-        public static List<String> listBuckets(String accessKey, String secretAccessKey)
+        /*
+private static bool comprobarCampos()
+{
+   IAmazonS3 client = new AmazonS3Client();
+   //NameValueCollection appConfig = ConfigurationManager.AppSettings;
+
+   if (string.IsNullOrEmpty(appConfig["AWSProfileName"]))
+   {
+       throw new Exception("AWSProfileName was not set in the App.config file.");
+   }
+   return true;
+}
+*/
+        public async Task<List<String>> ListBuckets()
         {
             try
             {
-                IAmazonS3 client = new AmazonS3Client(accessKey, secretAccessKey);
-
-                ListBucketsResponse response = client.ListBucketsAsync().Result;
+                //Configurar autenticacion
+                IAmazonS3 client = new AmazonS3Client("AKIAIBOCDNRR3F2HOZGQ", "IT8SiExvUBvZ0bS5zdzvytxuwMODeqs4aL+mV+6T", Amazon.RegionEndpoint.USEast1);
+                
+                ListBucketsResponse response = await client.ListBucketsAsync();
                 List<String> list = new List<string>();
                 foreach (S3Bucket bucket in response.Buckets)
                 {
@@ -37,15 +47,16 @@ namespace ControladorS3
             }
         }
 
-        public static List<S3Object> listObjects(String bucket)
+        public async Task<List<S3Object>> listObjects(String bucket)
         {
             try
             {
-                IAmazonS3 client = new AmazonS3Client();
+                //Configurar autenticacion
+                IAmazonS3 client = new AmazonS3Client("AKIAIBOCDNRR3F2HOZGQ", "IT8SiExvUBvZ0bS5zdzvytxuwMODeqs4aL+mV+6T", Amazon.RegionEndpoint.USEast1);
 
                 ListObjectsRequest request = new ListObjectsRequest();
                 request.BucketName = bucket;
-                ListObjectsResponse response = client.ListObjectsAsync(request).Result;
+                ListObjectsResponse response = await client.ListObjectsAsync(request);
                 return response.S3Objects;
             }
             catch (AmazonS3Exception amazonS3Exception)
@@ -54,7 +65,7 @@ namespace ControladorS3
             }
         }
 
-        public static void createBucket(String bucketName)
+        public void createBucket(String bucketName)
         {
             try
             {
@@ -71,7 +82,7 @@ namespace ControladorS3
             }
         }
 
-        public static void uploadObject(String bucketName, String path, String fileName)
+        public static async Task<PutObjectResponse> uploadObject(String bucketName, String path, String fileName)
         {
             try
             {
@@ -85,8 +96,8 @@ namespace ControladorS3
                 };
                 // titledRequest.Metadata.Add("title", "the title");
 
-                PutObjectResponse response = client.PutObjectAsync(request).Result;
-               
+                PutObjectResponse response = await client.PutObjectAsync(request);
+                return response;
             }
             catch (AmazonS3Exception amazonS3Exception)
             {

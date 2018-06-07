@@ -9,7 +9,6 @@ using SmartAdmin.Seed.Models;
 
 namespace SmartAdmin.Seed.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index() => View();

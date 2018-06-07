@@ -1,5 +1,6 @@
 #region Using
 
+using CircoParrotTools.Common.AWS.Handlers;
 using CircoParrotTools.Data.Models.DB;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authentication;
@@ -78,8 +79,8 @@ namespace SmartAdmin.Seed
 
 
             // Autenticacion y Autorizacion
-            services
-                .AddAuthentication(IISDefaults.AuthenticationScheme).AddCookie();
+            //services
+            //    .AddAuthentication(IISDefaults.AuthenticationScheme).AddCookie();
 
             //services.AddTransient<IClaimsTransformation, TAPPSUserClaimsTransformation>();
             
@@ -91,7 +92,7 @@ namespace SmartAdmin.Seed
             //services.AddScoped<ITAPPSUserRepository, TAPPSUserRepository>();
             //services.AddScoped<ISecurityService, SecurityService>();
             //services.AddScoped<IFeedIPTVService, FeedIPTVService>();
-            //services.AddScoped<IFeedIPTVRepository, FeedIPTVRepository>();
+            services.AddScoped<IS3Handler, S3Handler>();
 
         }
 
