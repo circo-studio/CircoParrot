@@ -3,6 +3,7 @@ using CircoParrotTools.Common;
 using System.Collections.Generic;
 using CircoParrotTools.Common.AWS.Handlers;
 using Amazon.S3.Model;
+using CircoParrotTools.Web.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,18 +27,21 @@ namespace CircoParrotTools.Web.Controllers
         public async System.Threading.Tasks.Task<IActionResult> ListaVideos(string bucket = "videosdeparrots")
         {
             List<S3Object> listaobj = await _s3Handler.listObjects(bucket);
-            List<string> listaVideos = new List<string>();
+            List<Video> listaVideos = new List<Video>();
+            string name, url, path , urlbase = "https://s3.amazonaws.com/" + bucket + "/";
             foreach (S3Object obj in listaobj)
             {
-                listaVideos.Add(obj.Key);
+                if (!obj.Key.EndsWith("/")) {
+                    path = obj.Key;
+                    url = urlbase + path;
+                    name = path.Split("/")[path.Split("/").Length-1];
+                    Video v = new Video(name, path, url);
+                    listaVideos.Add(v);
+                }
             }
 
-            ViewBag.Videos = listaVideos;
-            ViewBag.UrlBase = "https://s3.amazonaws.com/" + bucket + "/";
-            ViewBag.UrlActual = ViewData["urlBase"] + listaVideos[5];
-
-
-            return View();
+            //ViewBag.Videos = listaVideos;
+            return View(listaVideos);
         }
     }
 }
