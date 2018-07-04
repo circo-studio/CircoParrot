@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Amazon.MediaConvert;
 using Amazon.MediaConvert.Model;
 
@@ -164,7 +165,7 @@ namespace ConsoleMediaConverter
     {
         static void Main(string[] args)
         {
-            String mediaConvertRole = "TurnerMediaConvertRole";
+            String mediaConvertRole = "arn:aws:iam::378090785532:role/TurnerMediaConvertRole";
             String fileInput = "s3://mediaconvertin/B83UV-A-03-EL-COMANDANTE---EL-COMANDANTE-ae98f140.mov";
             String fileOutput = "s3://mediaconvertout/Salida.mov";
             AmazonMediaConvertClient client;
@@ -190,22 +191,28 @@ namespace ConsoleMediaConverter
             client = new
                 AmazonMediaConvertClient("AKIAJ35VKR7CZVBCL2GQ", "L2cnZrGPhvCD17X8hAbk4w2rd1sjPVtX8BE7OOmv", Amazon.RegionEndpoint.USEast1);
 
+            NetworkCredential cred = new NetworkCredential("AKIAJ35VKR7CZVBCL2GQ", "L2cnZrGPhvCD17X8hAbk4w2rd1sjPVtX8BE7OOmv");
+
+
             AmazonMediaConvertConfig mcConfig = new AmazonMediaConvertConfig
             {
                 ServiceURL = mediaConvertEndpoint,
-                ProxyCredentials = (System.Net.ICredentials)client
+                ProxyCredentials = cred
                 //                ProxyCredentials = client
             };
+
             AmazonMediaConvertClient mcClient = new AmazonMediaConvertClient(mcConfig);
             CreateJobRequest createJobRequest = new CreateJobRequest();
             createJobRequest.Role = mediaConvertRole;
             createJobRequest.UserMetadata.Add("Customer", "Amazon");
+
             #region Create job settings
             JobSettings jobSettings = new JobSettings();
             jobSettings.AdAvailOffset = 0;
             jobSettings.TimecodeConfig = new TimecodeConfig();
             jobSettings.TimecodeConfig.Source = TimecodeSource.EMBEDDED;
             createJobRequest.Settings = jobSettings;
+
             #region OutputGroup
             OutputGroup ofg = new OutputGroup();
             ofg.Name = "File Group";
