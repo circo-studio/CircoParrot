@@ -29,11 +29,10 @@ namespace CircoParrotTools.Common.AWS.Handlers
             String secret = "";
             try
             {
-                using (StreamReader sr = new StreamReader("c:\\temp\awskey.txt"))
-                {
-                    key = sr.ReadLine();
-                    secret = sr.ReadLine();
-                }
+                StreamReader sr = new StreamReader("c:\\temp\\awskey.txt");
+                key = sr.ReadLine();
+                secret = sr.ReadLine();
+
             }
             catch (Exception ex)
             {
