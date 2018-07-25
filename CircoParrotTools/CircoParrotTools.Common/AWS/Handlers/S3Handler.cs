@@ -31,8 +31,8 @@ private static bool comprobarCampos()
             try
             {
                 //Configurar autenticacion
-                IAmazonS3 client = new AmazonS3Client("AKIAIBOCDNRR3F2HOZGQ", "IT8SiExvUBvZ0bS5zdzvytxuwMODeqs4aL+mV+6T", Amazon.RegionEndpoint.USEast1);
-                
+                IAmazonS3 client = new AmazonS3Client("AKIAIYIYEIUSITOE3FUQ", "2bS3qTyjxyves/zeqR+gmiERhxGvU1fv2xWvCjrg", Amazon.RegionEndpoint.USEast1);
+
                 ListBucketsResponse response = await client.ListBucketsAsync();
                 List<String> list = new List<string>();
                 foreach (S3Bucket bucket in response.Buckets)
@@ -52,7 +52,7 @@ private static bool comprobarCampos()
             try
             {
                 //Configurar autenticacion
-                IAmazonS3 client = new AmazonS3Client("AKIAIBOCDNRR3F2HOZGQ", "IT8SiExvUBvZ0bS5zdzvytxuwMODeqs4aL+mV+6T", Amazon.RegionEndpoint.USEast1);
+                IAmazonS3 client = new AmazonS3Client("AKIAIYIYEIUSITOE3FUQ", "2bS3qTyjxyves/zeqR+gmiERhxGvU1fv2xWvCjrg", Amazon.RegionEndpoint.USEast1);
 
                 ListObjectsRequest request = new ListObjectsRequest();
                 request.BucketName = bucket;

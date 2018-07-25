@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.MediaConvert" Version="3.3.4" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.18.2" />
   </ItemGroup>
 
