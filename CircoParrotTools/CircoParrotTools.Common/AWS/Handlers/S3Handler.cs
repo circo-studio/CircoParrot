@@ -3,6 +3,7 @@ using Amazon.S3.Model;
 using CircoParrotTools.Common.AWS.Handlers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace CircoParrotTools.Common.AWS.Handlers
@@ -31,7 +32,9 @@ private static bool comprobarCampos()
             try
             {
                 //Configurar autenticacion
-                IAmazonS3 client = new AmazonS3Client("AKIAIYIYEIUSITOE3FUQ", "2bS3qTyjxyves/zeqR+gmiERhxGvU1fv2xWvCjrg", Amazon.RegionEndpoint.USEast1);
+                String key = "", secret = "";
+                getKeys(key, secret, "c:\\temp\\awskey.txt");
+                IAmazonS3 client = new AmazonS3Client(key, secret, Amazon.RegionEndpoint.USEast1);
 
                 ListBucketsResponse response = await client.ListBucketsAsync();
                 List<String> list = new List<string>();
@@ -51,8 +54,9 @@ private static bool comprobarCampos()
         {
             try
             {
-                //Configurar autenticacion
-                IAmazonS3 client = new AmazonS3Client("AKIAIYIYEIUSITOE3FUQ", "2bS3qTyjxyves/zeqR+gmiERhxGvU1fv2xWvCjrg", Amazon.RegionEndpoint.USEast1);
+                String key="", secret="";
+                getKeys(key, secret, "c:\\temp\\awskey.txt");
+                IAmazonS3 client = new AmazonS3Client(key, secret, Amazon.RegionEndpoint.USEast1);
 
                 ListObjectsRequest request = new ListObjectsRequest();
                 request.BucketName = bucket;
@@ -69,7 +73,9 @@ private static bool comprobarCampos()
         {
             try
             {
-                IAmazonS3 client = new AmazonS3Client();
+                String key = "", secret = "";
+                getKeys(key, secret, "c:\\temp\\awskey.txt");
+                IAmazonS3 client = new AmazonS3Client(key, secret, Amazon.RegionEndpoint.USEast1);
 
                 PutBucketRequest request = new PutBucketRequest();
                 request.BucketName = bucketName;
@@ -86,7 +92,9 @@ private static bool comprobarCampos()
         {
             try
             {
-                IAmazonS3 client = new AmazonS3Client();
+                String key = "", secret = "";
+                getKeys(key, secret, "c:\\temp\\awskey.txt");
+                IAmazonS3 client = new AmazonS3Client(key, secret, Amazon.RegionEndpoint.USEast1);
 
                 PutObjectRequest request = new PutObjectRequest()
                 {
@@ -109,7 +117,9 @@ private static bool comprobarCampos()
         {
             try
             {
-                IAmazonS3 client = new AmazonS3Client();
+                String key = "", secret = "";
+                getKeys(key, secret, "c:\\temp\\awskey.txt");
+                IAmazonS3 client = new AmazonS3Client(key, secret, Amazon.RegionEndpoint.USEast1);
 
                 DeleteObjectRequest request = new DeleteObjectRequest()
                 {
@@ -121,6 +131,21 @@ private static bool comprobarCampos()
             catch (AmazonS3Exception amazonS3Exception)
             {
                 throw amazonS3Exception;
+            }
+        }
+
+        private static void getKeys(String key, String secretKey, String URL)
+        {
+            try
+            {
+                StreamReader sr = new StreamReader(URL);
+                key = sr.ReadLine();
+                secretKey = sr.ReadLine();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Could not read the file");
             }
         }
     }
