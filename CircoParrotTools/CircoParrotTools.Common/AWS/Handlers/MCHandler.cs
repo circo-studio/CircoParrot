@@ -8,9 +8,13 @@ using System.Threading.Tasks;
 
 namespace CircoParrotTools.Common.AWS.Handlers
 {
-    class MCHandler
+    public class MCHandler : IMCHandler
     {
-        public async Task<List<Job>> ListJobs()
+        public MCHandler()
+        {
+        }
+
+        public async Task<List<Job>> listJobs()
         {
             String mediaConvertEndpoint = "";
             if (String.IsNullOrEmpty(mediaConvertEndpoint))
@@ -45,5 +49,6 @@ namespace CircoParrotTools.Common.AWS.Handlers
             ListJobsResponse listJobs = await mcClient.ListJobsAsync(req);
             return listJobs.Jobs;
         }
+
     }
 }

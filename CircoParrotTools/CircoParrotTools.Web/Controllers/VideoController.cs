@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using CircoParrotTools.Common.AWS.Handlers;
 using Amazon.S3.Model;
 using CircoParrotTools.Web.Models;
+using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,7 +25,7 @@ namespace CircoParrotTools.Web.Controllers
             return View();
         }
 
-        public async System.Threading.Tasks.Task<IActionResult> ListaVideos(string bucket = "videosdeparrots")
+        public async Task<IActionResult> ListaVideos(string bucket = "videosdeparrots")
         {
             List<S3Object> listaobj = await _s3Handler.listObjects(bucket);
             List<Video> listaVideos = new List<Video>();

@@ -92,6 +92,7 @@ namespace SmartAdmin.Seed
             //services.AddScoped<ISecurityService, SecurityService>();
             //services.AddScoped<IFeedIPTVService, FeedIPTVService>();
             services.AddScoped<IS3Handler, S3Handler>();
+            services.AddScoped<IMCHandler, MCHandler>();
 
         }
 
